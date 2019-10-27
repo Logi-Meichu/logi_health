@@ -4,6 +4,7 @@ import { StyleSheet } from "./StyleSheet";
 // import {IconButton,Tooltip ,Tabs,  Tab,Icon  }from "react-uwp";
 import Tabs, { Tab } from "react-uwp/Tabs";
 import Icon from "react-uwp/Icon";
+import { Link,Redirect } from 'react-router-dom'
 
 import NavigationView from "react-uwp/NavigationView";
 import SplitViewCommand from "react-uwp/SplitViewCommand";
@@ -14,19 +15,33 @@ import { Theme as UWPThemeProvider, getTheme } from "react-uwp/Theme";
 import MyComponent from "./MyComponent";
 // import bg from "./bg.svg";
 
+import Header from './components/Header'
+import Main from './components/Main'
+
+
 export default class App extends React.Component {
   static contextTypes = { theme: PropTypes.object };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      pages:0,
+      redirect: undefined
+    };
+  }
+
   render() {
     const navigationTopNodes = [
-      <SplitViewCommand icon={"\uE716"} />,
-      <SplitViewCommand label="Print" icon="PrintLegacy" />
+      
+      <SplitViewCommand icon={"\uE716"} onClick={() => this.setState({redirect:"/roster/4"})}> </SplitViewCommand>,
+      <SplitViewCommand label="Print" icon="PrintLegacy"></SplitViewCommand>
     ];
 
     const navigationBottomNode = [
       <SplitViewCommand label="Settings" icon={"\uE713"} />,
       <SplitViewCommand label="CalendarDay" icon={"\uE161"} />
     ];
-
 
     return (
       <div style={styles.edge_container} className="bg">
@@ -103,85 +118,50 @@ export default class App extends React.Component {
 
             </div> */}
 
-            {/* <NavigationView
-              style={styles.baseStyle}
-              pageTitle="San Francisco"
-              displayMode="overlay"
-              autoResize={false}
-              background={"./bg.svg"}
-              initWidth={48}
-              navigationTopNodes={navigationTopNodes}
-              navigationBottomNodes={navigationBottomNode}
-              focusNavigationNodeIndex={3}
-            >
-              <MyComponent />
-            </NavigationView> */}
-
+{/* dsfdfdfdfd */}
+ 
             <NavigationView
               style={styles.NavigationStyle}
               pageTitle="San Francisco"
               displayMode="compact"
               autoResize={false}
               // initWidth={320}
-              expandedWidth={480}
+              expandedWidth={200}
               defaultExpanded={false}
 
-
+              className="navigation"
 
               navigationTopNodes={navigationTopNodes}
               navigationBottomNodes={navigationBottomNode}
               focusNavigationNodeIndex={3}
+              render={prop => (console.log(prop), <div></div>)}
+
+              state={this.state.pages}
+              // shouldComponentUpdate={nextProps: }
+              // render={}
             >
-              <MyComponent />
+              {/* <MyComponent />
               <MyComponent />
 
-              <MyComponent />
+              <MyComponent /> */}
+
+
 
             </NavigationView>
 
-            {/* <div>
-              <NavigationView
-                isControlled
-                style={[{ width: 640, height: 640, }, styles.baseStyle]}
-                pageTitle="San Francisco"
-                displayMode="compact"
-                autoResize={false}
-                defaultExpanded
-                navigationTopNodes={navigationTopNodes}
-                navigationBottomNodes={navigationBottomNode}
-                focusNavigationNodeIndex={2}
-              >
-                <img
-                  src={require("./bg.svg")}
-                  height="100%"
-                  style={{ objectFit: "cover" }}
-                />
+           
+            <Header />
 
-              </NavigationView>
-            </div> */}
+            {
+              this.state.redirect
+                ? <Main><Redirect to={this.state.redirect}/></Main>
+                : <Main />
+            }
 
-            {/* <div>
-              <NavigationView
-                isControlled={false}
-                style={[{ width: 640, height: 640, }, styles.baseStyle]}
-                pageTitle="San Francisco"
-                displayMode="compact"
-                autoResize={false}
-                initWidth={120}
-                expandedWidth={480}
-                defaultExpanded={false}
-                navigationTopNodes={navigationTopNodes}
-                navigationBottomNodes={navigationBottomNode}
-                focusNavigationNodeIndex={2}
-              >
-                <img
-                  src={require("./bg.svg")}
-                  height="100%"
-                  style={{ objectFit: "cover" }}
-                />
+            
 
-              </NavigationView>
-            </div> */}
+
+           
           </UWPThemeProvider>
         </div>
 

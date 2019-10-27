@@ -21,3 +21,8 @@ body * {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.navigation span {
+  align-items: center;
+  justify-content: center;
+}

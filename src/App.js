@@ -18,6 +18,13 @@ import MyComponent from "./MyComponent";
 import Header from './components/Header'
 import Main from './components/Main'
 
+function linkTo(path) {
+  return () => {
+    let element = document.querySelector(`body a[href='${path}']`);
+    element && element.click();
+  };
+}
+
 
 export default class App extends React.Component {
   static contextTypes = { theme: PropTypes.object };
@@ -33,14 +40,15 @@ export default class App extends React.Component {
 
   render() {
     const navigationTopNodes = [
-      
-      <SplitViewCommand icon={"\uE716"} onClick={() => this.setState({redirect:"/roster/4"})}> </SplitViewCommand>,
-      <SplitViewCommand label="Print" icon="PrintLegacy"></SplitViewCommand>
+      <SplitViewCommand icon={"\uE18C"} label="screen used time" onClick={linkTo("/screen-used-time")}></SplitViewCommand>,
+      <SplitViewCommand icon={"\uE962"} label="mouse used time" onClick={linkTo("/mouse-used-time")}></SplitViewCommand>,
+      <SplitViewCommand icon={"\uE087"} label="keyboard used time" onClick={linkTo("/keyboard-used-time")}></SplitViewCommand>,
+      <SplitViewCommand icon={"\uE161"} label="task record" onClick={linkTo("/todo-list")}></SplitViewCommand>
     ];
 
     const navigationBottomNode = [
       <SplitViewCommand label="Settings" icon={"\uE713"} />,
-      <SplitViewCommand label="CalendarDay" icon={"\uE161"} />
+      // <SplitViewCommand label="CalendarDay" icon={"\uE161"} />
     ];
 
     return (
@@ -122,7 +130,7 @@ export default class App extends React.Component {
  
             <NavigationView
               style={styles.NavigationStyle}
-              pageTitle="San Francisco"
+              pageTitle="Logitech"
               displayMode="compact"
               autoResize={false}
               // initWidth={320}
@@ -133,7 +141,7 @@ export default class App extends React.Component {
 
               navigationTopNodes={navigationTopNodes}
               navigationBottomNodes={navigationBottomNode}
-              focusNavigationNodeIndex={3}
+              focusNavigationNodeIndex={0}
               render={prop => (console.log(prop), <div></div>)}
 
               state={this.state.pages}

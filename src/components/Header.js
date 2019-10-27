@@ -1,15 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+let pathList = [
+  "/",
+  "/roster",
+  "/schedule",
+  "/screen-used-time",
+  "/mouse-used-time",
+  "/keyboard-used-time",
+  "/todo-list"
+];
+
 // The Header creates links that can be used to navigate
 // between routes.
 const Header = () => (
-  <header>
+  <header style={{ display: "none" }}>
     <nav>
       <ul>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/roster'>Roster</Link></li>
-        <li><Link to='/schedule'>Schedule</Link></li>
+        {pathList.map((path, key) =>
+          <li key={key}>
+            <Link to={path}></Link>
+          </li>
+        )}
       </ul>
     </nav>
   </header>

@@ -18,6 +18,13 @@ import MyComponent from "./MyComponent";
 import Header from './components/Header'
 import Main from './components/Main'
 
+function linkTo(path) {
+  return () => {
+    let element = document.querySelector(`body a[href='${path}']`);
+    element && element.click();
+  };
+}
+
 
 export default class App extends React.Component {
   static contextTypes = { theme: PropTypes.object };
@@ -33,8 +40,7 @@ export default class App extends React.Component {
 
   render() {
     const navigationTopNodes = [
-      
-      <SplitViewCommand icon={"\uE716"} onClick={() => this.setState({redirect:"/roster/4"})}> </SplitViewCommand>,
+      <SplitViewCommand icon={"\uE716"} onClick={linkTo("/roster")}> </SplitViewCommand>,
       <SplitViewCommand label="Print" icon="PrintLegacy"></SplitViewCommand>
     ];
 

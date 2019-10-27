@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom'
 let pathList = [
   "/",
   "/roster",
-  "/schedule"
+  "/schedule",
+  "/screen-used-time",
+  "/mouse-used-time",
+  "/keyboard-used-time",
+  "/todo-list"
 ];
 
 // The Header creates links that can be used to navigate
